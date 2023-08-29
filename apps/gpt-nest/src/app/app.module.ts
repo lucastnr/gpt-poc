@@ -1,13 +1,15 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 
-import { AppController } from './app.controller';
-import { GptService } from './gpt.service';
+import { AppController } from "./app.controller";
+import { GptService } from "./gpt.service";
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  })],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [GptService],
 })
