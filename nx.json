@@ -34,5 +34,18 @@
     ],
     "sharedGlobals": []
   },
-  "defaultProject": "gpt-nest"
+  "defaultProject": "gpt-nest",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "none",
+        "linter": "eslint"
+      }
+    }
+  }
 }
