@@ -1,11 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get } from "@nestjs/common";
 
 @Controller()
 export class AppController {
   constructor() {}
 
-  @Get()
+  @Get("teste")
   getHello() {
-    return 'Hello World!';
+    return "Hello World!";
   }
 }
