@@ -11,6 +11,10 @@ export class GptService {
       model: this.model,
       messages: [
         {
+          content: "You can only answer in brazilian portuguese.",
+          role: "system",
+        },
+        {
           content: prompt,
           role: "user",
         },
