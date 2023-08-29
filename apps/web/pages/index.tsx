@@ -1,19 +1,23 @@
-import OpenAi from "openai";
 import { useCallback, useRef, useState } from "react";
-import { getCompletion } from "../utils/api";
+import { getCompletionStream } from "../utils/api";
 
 export function Index() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const [result, setResult] = useState<OpenAi.Chat.ChatCompletion>();
+  const [result, setResult] = useState("");
 
   const sendPrompt = useCallback(async () => {
     const prompt = inputRef.current?.value;
 
     if (!prompt) return;
 
-    const result = await getCompletion(prompt);
-
-    setResult(result.data);
+    getCompletionStream(prompt, {
+      onMessage: (completion) => {
+        setResult(completion.message);
+      },
+      onOpen: () => {
+        setResult("");
+      },
+    });
   }, []);
 
   return (
@@ -26,7 +30,7 @@ export function Index() {
         <textarea ref={inputRef} />
         <button onClick={sendPrompt}>Send</button>
       </div>
-      <p>Result: {result?.choices?.[0]?.message?.content || ""}</p>
+      <p>Result: {result}</p>
     </div>
   );
 }
